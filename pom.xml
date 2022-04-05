@@ -11,11 +11,6 @@
 		<project.scm.id>scm</project.scm.id>
 	</properties>
 
-	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/link-intersystems/lis-central-pom/issues</url>
-	</issueManagement>
-
 	<organization>
 		<name>Link Intersystems GmbH</name>
 		<url>http://www.link-intersystems.com</url>
