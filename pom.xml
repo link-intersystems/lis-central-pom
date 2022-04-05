@@ -1,77 +1,94 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.link-intersystems</groupId>
-	<artifactId>lis-central-pom</artifactId>
-	<version>1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>Link Intersystems Central</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.link-intersystems</groupId>
+    <artifactId>lis-central-pom</artifactId>
+    <version>1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Link Intersystems Central</name>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.scm.id>scm</project.scm.id>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.scm.id>scm</project.scm.id>
+    </properties>
 
-	<organization>
-		<name>Link Intersystems GmbH</name>
-		<url>http://www.link-intersystems.com</url>
-	</organization>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
-	<developers>
-		<developer>
-			<id>rene.link</id>
-			<name>René Link</name>
-			<organization>Link Intersystems GmbH</organization>
-			<organizationUrl>http://www.link-intersystems.com</organizationUrl>
-			<email>rene.link@link-intersystems.com</email>
-			<timezone>Europe/Berlin</timezone>
-			<url>http://stackoverflow.com/users/974186/ren%C3%A9-link</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
-	</developers>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-			<comments>A business-friendly OSS license</comments>
-		</license>
-	</licenses>
+    <scm>
+        <developerConnection>scm:git:https://github.com/link-intersystems/lis-central-pom.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
+    <organization>
+        <name>Link Intersystems GmbH</name>
+        <url>http://www.link-intersystems.com</url>
+    </organization>
 
-	<profiles>
-		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>3.0.1</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+    <developers>
+        <developer>
+            <id>rene.link</id>
+            <name>René Link</name>
+            <organization>Link Intersystems GmbH</organization>
+            <organizationUrl>http://www.link-intersystems.com</organizationUrl>
+            <email>rene.link@link-intersystems.com</email>
+            <timezone>Europe/Berlin</timezone>
+            <url>http://stackoverflow.com/users/974186/ren%C3%A9-link</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
 </project>
