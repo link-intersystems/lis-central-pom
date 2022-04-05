@@ -7,6 +7,8 @@
     <packaging>pom</packaging>
     <name>Link Intersystems Central</name>
 
+    <description>Parent pom for maven central artifact deployment.</description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.scm.id>scm</project.scm.id>
@@ -59,9 +61,13 @@
     </distributionManagement>
 
     <scm>
+        <url>https://github.com/link-intersystems/lis-central-pom</url>
         <developerConnection>scm:git:https://github.com/link-intersystems/lis-central-pom.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
+
+
+    <url>https://github.com/link-intersystems/lis-central-pom</url>
 
     <organization>
         <name>Link Intersystems GmbH</name>
