@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.link-intersystems</groupId>
     <artifactId>lis-central-pom</artifactId>
@@ -11,6 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.scm.id>scm</project.scm.id>
+        <snapshots.updatePolicy>always</snapshots.updatePolicy>
     </properties>
 
     <profiles>
@@ -46,6 +48,30 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>gh-pages</id>
+            <distributionManagement>
+                <site>
+                    <id>gh-pages</id>
+                    <name>${project.name}</name>
+                    <url>${scm.developerConnection}</url>
+                </site>
+            </distributionManagement>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-scm-publish-plugin</artifactId>
+                            <configuration>
+                                <scmBranch>gh-pages</scmBranch>
+                                <subDirectory>${project.version}</subDirectory>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
 
     <distributionManagement>
@@ -58,6 +84,17 @@
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>snapshots-sonatype</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>${snapshots.updatePolicy}</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <scm>
         <url>https://github.com/link-intersystems/lis-central-pom</url>
@@ -96,4 +133,26 @@
             <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-publish-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
